@@ -25,7 +25,7 @@ def todos(request):
         body = json.loads(request.body)
         doc = {
             'title':     body.get('title'),
-            'completed': False,
+            'completed': body.get('completed', False),
         }
         result = col.insert_one(doc)
         doc['id'] = str(result.inserted_id)
@@ -48,12 +48,16 @@ def todo_detail(request, todo_id):
 
     if request.method == 'PUT':
         body = json.loads(request.body)
-        col.update_one({'_id': oid}, {'$set': {'title': body.get('title')}})
+        col.update_one({'_id': oid}, {'$set': {
+            'title': body.get('title'),
+            'completed': body.get('completed', False)
+        }})
         doc = col.find_one({'_id': oid})
         doc['id'] = str(doc['_id'])
         del doc['_id']
         return JsonResponse({'data': doc})
-
+    
+    
     if request.method == 'DELETE':
         col.delete_one({'_id': oid})
         return JsonResponse({'message': 'Deleted'})

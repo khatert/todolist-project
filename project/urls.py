@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.urls import path , include
 
+
 urlpatterns = [
-    path('', include('todolist.urls')),
+    path('', include('todolist.urls')), # 
 
 ]
 ROOT_URLCONF = 'project.urls'

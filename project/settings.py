@@ -6,8 +6,8 @@ SECRET_KEY = 'django-insecure-todolist-secret-key-change-in-production'
  
 DEBUG = True
  
-ALLOWED_HOSTS = ['*']
- 
+ALLOWED_HOSTS = ['*'] 
+
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
